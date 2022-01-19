@@ -30,7 +30,7 @@ function magicAlgorithm(numLikes, comment, numComments, lcRatio) {
 
 }
 
-
+/*
 alert("Welcome to TikTok! Pretend that you are watching a video right now");
 let likeCount = Number(prompt("How many likes did this video get?"));
 let comment = prompt("What is the top comment on the video?");
@@ -43,3 +43,18 @@ console.log(lcRatio);
 let rank = magicAlgorithm(likeCount, comment, numComments, lcRatio)
 
 alert("This video's rank is #" + rank)
+*/
+
+
+function showUI() {
+    let likeCount = Number(document.getElementById("like-textbox").value);
+    let numComments = Number(document.getElementById("numcomment-textbox").value);
+    let comment = (document.getElementById("topcomment-textbox").value);
+
+
+    let lcRatio = likecommentRatio(likeCount, numComments);
+
+
+    let rankResult = magicAlgorithm(likeCount, comment, numComments, lcRatio)
+    document.getElementById("result-paragraph").innerHTML = "TikTok Rank: " + rankResult;
+}
