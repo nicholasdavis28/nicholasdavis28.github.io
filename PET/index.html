@@ -1,0 +1,43 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Ecosystem</title>
+
+
+</head>
+
+<body style="height: 700px; width: 1100px; border: 10px solid rgb(64, 211, 5);">
+
+    <div style="text-align: center;">
+        <h1>This is a Leprechaun from Ireland</h1>
+        <p>Give him food, beer and money to keep him happy and if you're lucky he will lead you to a pot of gold!</p>
+
+        <img src="images/leprechaun.jpg" alt="" height="350px" width="550px">
+        <p id="leprechaun-condition">The Leprechaun is happy!</p>
+    </div>
+
+    <div style="position: absolute; top:525px; left: 25px;">
+        <h3>Leprechaun Hunger Meter</h3>
+        <meter id="food-meter" min="0" max="100" value="50"></meter>
+        <p id="food-paragraph">5</p>
+        <button id="food-button" onclick="foodLeprechaun()">Feed the Leprechaun!</button>
+    </div>
+    <div style="position: absolute; top: 525px; left: 350px;">
+        <h3>Leprechaun Money Meter</h3>
+        <meter id="money-meter" min="0" max="100" value="50"></meter>
+        <p id="money-paragraph">5</p>
+        <button id="money-button" onclick="moneyLeprechaun()">Give him money!</button>
+    </div>
+    <div style="position: absolute; top: 525px; left: 700px;">
+        <h3>Leprechaun Beer Meter</h3>
+        <meter id="beer-meter" min="0" max="100" value="50"></meter>
+        <p id="beer-paragraph">5</p>
+        <button id="beer-button" onclick="beerLeprechaun()">Grab a pint!</button>
+    </div>
+    <script src="js/pet.js"></script>
+</body>
+
+</html>
