@@ -5,13 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas Animation Swag!</title>
+    <title>Simplified Pong Game Demo!</title>
 </head>
 
-<body>
-    <h1>Welcome to Canvas</h1>
-    <canvas id="my-canvas" width="500" height="500" style="border: 1px solid black;"><canvas></canvas>
-    <script src="js/animation.js"></script>
+<body onkeydown="keyPressed(event)" onkeyup="keyReleased(event)" style="background-color: rgba(5, 141, 0, 0.541);">
+    <h1>!!Soccer Stars 2022!!</h1>
+    <canvas id="my-canvas" width="1500" height="800" style="border: 1px solid black;"></canvas>
+
+    <p id="keydown-output"></p>
+    <p id="keyup-output"></p>
+    <img id="soccer" src="image/soccer.jpg" alt="soccer" style="visibility: hidden;">
+    <script src="js/canvas.js"></script>
+
+    <div style="position: absolute; top: 350px; left: 1650px;    ">
+        <h3>Score</h3>
+        <meter id="playergoal-meter" min="0" max="3" value="0"></meter>
+        <p id="playergoal-paragraph">0</p>
+    </div>
 </body>
 
 </html>
