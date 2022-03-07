@@ -52,7 +52,7 @@ const IMG_WIDTH = 40;
 const IMG_HEIGHT = 40;
 
 // ball position and movement
-let ballX = 100;
+let ballX = 500;
 let ballY = 100;
 let ballXDir = 8;
 let ballYDir = 8;
