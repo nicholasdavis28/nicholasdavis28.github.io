@@ -8,7 +8,7 @@
     <title>Simplified Pong Game Demo!</title>
 </head>
 
-<body onkeydown="keyPressed(event)" onkeyup="keyReleased(event)" style="background-color: rgba(5, 141, 0, 0.541);">
+<body onkeydown="keyPressed(event)" onkeyup="keyReleased(event)" style="background-color: rgb(251, 255, 0);">
     <h1>!!Soccer Stars 2022!!</h1>
     <canvas id="my-canvas" width="1500" height="800" style="border: 1px solid black;"></canvas>
 
@@ -17,10 +17,16 @@
     <img id="soccer" src="image/soccer.jpg" alt="soccer" style="visibility: hidden;">
     <script src="js/canvas.js"></script>
 
-    <div style="position: absolute; top: 350px; left: 1650px;    ">
-        <h3>Score</h3>
+    <div style="position: absolute; top: 750px; left: 1650px;    ">
+        <h3>Player Goals</h3>
         <meter id="playergoal-meter" min="0" max="3" value="0"></meter>
         <p id="playergoal-paragraph">0</p>
+    </div>
+
+    <div style="position: absolute; top: 550px; left: 1650px;    ">
+        <h3>Opposition Goals</h3>
+        <meter id="oppgoal-meter" min="0" max="3" value="0"></meter>
+        <p id="oppgoal-paragraph">0</p>
     </div>
 </body>
 

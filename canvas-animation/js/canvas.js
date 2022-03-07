@@ -12,7 +12,7 @@ let playerX = 250;
 let playerY = 250;
 let playerXDir = 0;
 let playerYDir = 0;
-let playerSpeed = 5.5;
+let playerSpeed = 8.5;
 const PADDLE_WIDTH = 20;
 const PADDLE_HEIGHT = 100;
 
@@ -21,7 +21,7 @@ let defender1X = 1000;
 let defender1Y = 300;
 let defender1XDir = 0;
 let defender1YDir = 1;
-let defender1Speed = 5.5;
+let defender1Speed = 8.5;
 const DEFENDER1_WIDTH = 20;
 const DEFENDER1_HEIGHT = 100;
 
@@ -30,18 +30,10 @@ let defender2X = 1200;
 let defender2Y = 300;
 let defender2XDir = 0;
 let defender2YDir = 1;
-let defender2Speed = 3.5;
+let defender2Speed = 6.5;
 const DEFENDER2_WIDTH = 20;
 const DEFENDER2_HEIGHT = 100;
 
-//defender 3 position and movement
-let defender3X = 1400;
-let defender3Y = 300;
-let defender3XDir = 0;
-let defender3YDir = 1;
-let defender3Speed = 8;
-const DEFENDER3_WIDTH = 20;
-const DEFENDER3_HEIGHT = 100;
 
 // opposition goal
 let oppgoalX = 1468;
@@ -62,12 +54,17 @@ const IMG_HEIGHT = 40;
 // ball position and movement
 let ballX = 100;
 let ballY = 100;
-let ballXDir = 5;
-let ballYDir = 5;
+let ballXDir = 8;
+let ballYDir = 8;
 let BALL_RADIUS = 20;
 
 // meter values
 let playergoal = 0
+let oppgoal = 0
+let min = 10
+let max = 1000
+
+
 
 function drawPlayer() {
     ctx.fillRect(playerX, playerY, PADDLE_WIDTH, PADDLE_HEIGHT)
@@ -89,11 +86,6 @@ function drawOppgoal() {
 function drawPlayergoal() {
     ctx.fillRect(playergoalX, playergoalY, PLAYERGOAL_WIDTH, PLAYERGOAL_HEIGHT)
 }
-/*
-function drawDefender3() {
-    ctx.fillRect(defender3X, defender3Y, DEFENDER3_WIDTH, DEFENDER3_HEIGHT)
-}
-*/
 
 function movePlayer() {
     playerX += (playerSpeed * playerXDir);
@@ -130,31 +122,28 @@ function moveDefender2() {
 
 }
 
-function moveDefender3() {
-
-    defender3Y += (defender3Speed * defender3YDir);
-
-    if (defender3Y > 800 - DEFENDER3_HEIGHT || (defender2Y < 0 + DEFENDER3_WIDTH)) {
-        defender3YDir = -defender3YDir;
-    }
-}
 
 
 function drawBall() {
     ctx.beginPath()
     ctx.arc(ballX, ballY, BALL_RADIUS, 0, 2 * Math.PI);
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "#0095DD";
     ctx.fill();
 }
 
-function drawImage() {
+/*function drawImage() {
     ctx.drawImage(soccer, ballX, ballY, IMG_WIDTH, IMG_HEIGHT);
-}
+}*/
 
 function moveBall() {
     ballY += ballYDir;
     ballX += ballXDir;
 }
+
+function randomNum(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 
 function checkBallCollision() {
     // check vertical wall
@@ -187,12 +176,7 @@ function checkBallCollision() {
         ballXDir = ballXDir * -1.005;
     }
 
-    /*if (ballY + BALL_RADIUS >= defender3Y &&
-        ballY - BALL_RADIUS <= defender3Y + DEFENDER3_HEIGHT &&
-        ballX + BALL_RADIUS >= defender3X &&
-        ballX - BALL_RADIUS <= defender3X + DEFENDER3_WIDTH) {
-        ballXDir = ballXDir * -1.005;
-    }*/
+
 }
 
 function checkGoal() {
@@ -202,8 +186,12 @@ function checkGoal() {
         ballX - BALL_RADIUS <= oppgoalX + OPPGOAL_WIDTH) {
 
         playergoal += 1;
-        ballY = 400;
+        ballY = 500;
         ballX = 800;
+        ballXDir = ballXDir * -1.25
+        defender2Speed = defender2Speed * 1.25
+        defender1Speed = defender1Speed * 1.25
+        playerSpeed = playerSpeed * 1.25
     }
 
     if (ballY + BALL_RADIUS >= playergoalY &&
@@ -211,9 +199,28 @@ function checkGoal() {
         ballX + BALL_RADIUS >= playergoalX &&
         ballX - BALL_RADIUS <= playergoalX + PLAYERGOAL_WIDTH) {
 
-        playergoal -= 1;
-        ballY = 400;
+        oppgoal += 1;
+        ballY = 500;
         ballX = 800;
+        ballXDir = ballXDir * -1.25
+        defender2Speed = defender2Speed * 1.25
+        defender1Speed = defender1Speed * 1.25
+        playerSpeed = playerSpeed * 1.25
+    }
+
+
+
+
+}
+
+function checkWin() {
+
+    if (playergoal >= 3) {
+        alert("Congratulations you win!");
+        window.location = "https://nicholasdavis28.github.io/canvas-animation/index.html"
+    } else if (oppgoal >= 3) {
+        alert("You lose! Get Better!!!")
+        window.location = "https://nicholasdavis28.github.io/canvas-animation/index.html"
     }
 
 }
@@ -223,23 +230,26 @@ function refreshUI() {
     movePlayer();
     moveDefender1();
     moveDefender2();
-    /*moveDefender3();*/
     drawPlayer();
     drawDefender1();
     drawDefender2();
     drawOppgoal();
     drawPlayergoal();
-    /*drawDefender3();*/
     // animate ball
     checkBallCollision();
     let playergoalMeter = document.getElementById("playergoal-meter");
     playergoalMeter.value = playergoal;
     let playergoalParagraph = document.getElementById("playergoal-paragraph");
     playergoalParagraph.innerHTML = playergoal;
-    checkGoal();
+    let oppgoalMeter = document.getElementById("oppgoal-meter");
+    oppgoalMeter.value = oppgoal;
+    let oppgoalParagraph = document.getElementById("oppgoal-paragraph");
+    oppgoalParagraph.innerHTML = oppgoal;
     moveBall();
     // drawBall();
-    drawImage();
+    drawBall();
+    checkGoal();
+    checkWin();
 }
 
 // when key is pressed
