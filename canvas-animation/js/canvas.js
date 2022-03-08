@@ -222,7 +222,7 @@ function checkGoal() {
         ballX - BALL_RADIUS <= oppgoalX + OPPGOAL_WIDTH) {
 
         playergoal += 1;
-        ballY = 100;
+        ballY = 600;
         ballX = 1200;
         ballXDir = ballXDir * -1.25
         defender2Speed = defender2Speed * 1.25
@@ -257,10 +257,14 @@ function checkWin() {
         alert("Congratulations you win!");
         window.location = "https://nicholasdavis28.github.io/canvas-animation/index.html"
         window.location.reload();
+        playergoal = 0
+        oppgoal = 0
     } else if (oppgoal >= 3) {
         alert("You lose! Get Better!!!")
         window.location = "https://nicholasdavis28.github.io/canvas-animation/index.html"
         window.location.reload();
+        playergoal = 0
+        oppgoal = 0
     }
 
 }
