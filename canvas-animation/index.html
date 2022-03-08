@@ -5,17 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simplified Pong Game Demo!</title>
+    <title>Soccer Stars 2022</title>
 </head>
 
 <body onkeydown="keyPressed(event)" onkeyup="keyReleased(event)" style="background-color: rgb(251, 255, 0);">
     <h1>!!Soccer Stars 2022!!</h1>
-    <canvas id="my-canvas" width="1500" height="800" style="border: 1px solid black;"></canvas>
+    <canvas id="my-canvas" width="1500" height="800" style="border: 1px solid rgb(255, 10, 222);"></canvas>
 
     <p id="keydown-output"></p>
     <p id="keyup-output"></p>
     <img id="soccer" src="image/soccer.jpg" alt="soccer" style="visibility: hidden;">
     <script src="js/canvas.js"></script>
+
+
+    <div style="position: absolute; top: 150px; left: 1650px;    ">
+        <h3>I key = MOVE UP</h3>
+        <h3>K key = MOVE DOWN</h3>
+    </div>
 
     <div style="position: absolute; top: 350px; left: 1650px;    ">
         <h3>Player Goals</h3>

@@ -8,7 +8,7 @@ let keydownOutput = document.getElementById("keydown-output")
 let keyupOutput = document.getElementById("keyup-output")
 
 //player position and movement
-let playerX = 250;
+let playerX = 350;
 let playerY = 250;
 let playerXDir = 0;
 let playerYDir = 0;
@@ -64,6 +64,8 @@ let oppgoal = 0
 let min = 10
 let max = 1000
 
+//AI Values 
+let distance = 200
 
 
 function drawPlayer() {
@@ -103,22 +105,56 @@ function movePlayer() {
 
 function moveDefender1() {
 
-    defender1Y += (defender1Speed * defender1YDir);
 
-    if (defender1Y > 800 - DEFENDER1_HEIGHT || (defender1Y < 0 + DEFENDER1_WIDTH)) {
-        defender1YDir = -defender1YDir;
+    if (ballY >= defender1Y && defender1X - ballX <= distance && defender1X - ballX >= 10) {
+        defender1YDir = 1
+    } else if (ballY <= defender1Y && defender1X - ballX <= distance && defender1X - ballX >= 10) {
+        defender1YDir = -1
+    } else if (ballY >= defender1Y && defender1X - ballX <= 0 && defender1X - ballX >= -200) {
+        defender1YDir = -1
+    } else if (ballY <= defender1Y && defender1X - ballX <= 0 && defender1X - ballX >= -200) {
+        defender1YDir = 1
+    } else if (defender1X - ballX >= distance && defender1Y > 450) {
+        defender1YDir = -1
+    } else if (defender1X - ballX >= distance && defender1Y < 350) {
+        defender1YDir = 1
+    } else if (defender1X - ballX >= distance && defender1Y == 400) {
+        defender1YDir = 0
+    } else {
+        defender1YDir = 0
     }
+
+
+
+    defender1Y += (defender1Speed * defender1YDir);
 
 
 }
 
 function moveDefender2() {
 
+
+
+    if (ballY >= defender2Y && defender2X - ballX <= distance && defender2X - ballX >= 10) {
+        defender2YDir = 1
+    } else if (ballY <= defender2Y && defender2X - ballX <= distance && defender2X - ballX >= 10) {
+        defender2YDir = -1
+    } else if (ballY >= defender2Y && defender2X - ballX <= 0 && defender2X - ballX >= -200) {
+        defender2YDir = -1
+    } else if (ballY <= defender2Y && defender2X - ballX <= 0 && defender2X - ballX >= -200) {
+        defender2YDir = 1
+    } else if (defender2X - ballX >= distance && defender2Y > 250) {
+        defender2YDir = -1
+    } else if (defender2X - ballX >= distance && defender2Y < 150) {
+        defender2YDir = 1
+    } else if (defender2X - ballX >= distance && defender2Y == 200) {
+        defender2YDir = 0
+    } else {
+        defender2YDir = 0
+    }
+
     defender2Y += (defender2Speed * defender2YDir);
 
-    if (defender2Y > 800 - DEFENDER2_HEIGHT || (defender2Y < 0 + DEFENDER2_WIDTH)) {
-        defender2YDir = -defender2YDir;
-    }
 
 }
 
@@ -186,12 +222,13 @@ function checkGoal() {
         ballX - BALL_RADIUS <= oppgoalX + OPPGOAL_WIDTH) {
 
         playergoal += 1;
-        ballY = 500;
-        ballX = 800;
+        ballY = 100;
+        ballX = 1200;
         ballXDir = ballXDir * -1.25
         defender2Speed = defender2Speed * 1.25
         defender1Speed = defender1Speed * 1.25
         playerSpeed = playerSpeed * 1.25
+        distance = distance + 100
     }
 
     if (ballY + BALL_RADIUS >= playergoalY &&
@@ -200,12 +237,13 @@ function checkGoal() {
         ballX - BALL_RADIUS <= playergoalX + PLAYERGOAL_WIDTH) {
 
         oppgoal += 1;
-        ballY = 500;
-        ballX = 800;
+        ballY = 100;
+        ballX = 300;
         ballXDir = ballXDir * -1.25
         defender2Speed = defender2Speed * 1.25
         defender1Speed = defender1Speed * 1.25
         playerSpeed = playerSpeed * 1.25
+        distance = distance + 100
     }
 
 
@@ -218,9 +256,11 @@ function checkWin() {
     if (playergoal >= 3) {
         alert("Congratulations you win!");
         window.location = "https://nicholasdavis28.github.io/canvas-animation/index.html"
+        window.location.reload();
     } else if (oppgoal >= 3) {
         alert("You lose! Get Better!!!")
         window.location = "https://nicholasdavis28.github.io/canvas-animation/index.html"
+        window.location.reload();
     }
 
 }
@@ -259,11 +299,7 @@ function keyPressed(event) {
     keydownOutput.innerHTML = "Key down code: " + key;
 
     // move player
-    if (key === 74) {
-        playerXDir = -1;
-    } else if (key === 76) {
-        playerXDir = 1;
-    } else if (key == 73) {
+    if (key == 73) {
         playerYDir = -1
     } else if (key === 75) {
         playerYDir = 1;
